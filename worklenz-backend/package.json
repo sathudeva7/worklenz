@@ -12,12 +12,12 @@
   "author": "worklenz.com",
   "scripts": {
     "test": "jest",
-    "start": "node build/bin/www.js",
-    "dev": "npm run build:dev && concurrently \"npm run watch\" \"npm run dev:server\"",
-    "dev:server": "nodemon --watch build --ext js,json,pug --delay 2000ms build/bin/www.js",
-    "build": "npm run clean && npm run compile && npm run copy && npm run compress",
-    "build:dev": "npm run clean && npm run compile:dev && npm run copy",
-    "build:prod": "npm run clean && npm run compile:prod && npm run copy && npm run minify && npm run compress",
+    "start": "node init && node build/bin/www.js",
+    "dev": "node init && npm run build:dev && concurrently \"npm run watch\" \"npm run dev:server\"",
+    "dev:server": "node init && nodemon --watch build --ext js,json,pug --delay 2000ms build/bin/www.js",
+    "build": "node init && npm run clean && npm run compile && npm run copy && npm run compress",
+    "build:dev": "node init && npm run clean && npm run compile:dev && npm run copy",
+    "build:prod": "node init && npm run clean && npm run compile:prod && npm run copy && npm run minify && npm run compress",
     "clean": "rimraf build",
     "compile": "tsc --build tsconfig.prod.json",
     "compile:dev": "tsc --build tsconfig.json",
@@ -43,6 +43,8 @@
     "migrate:up": "node scripts/migrate.js up",
     "migrate:down": "node scripts/migrate.js down 1",
     "migrate:create": "node scripts/migrate.js create",
+    "migrate:addons": "node scripts/migrate-addons.js",
+    "build:addons": "node init && node scripts/build-addons.js",
     "migrate:bootstrap": "node scripts/migrate-bootstrap.js"
   },
   "jestSonar": {
